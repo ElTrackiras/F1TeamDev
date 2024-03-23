@@ -1,10 +1,8 @@
 from flask import Flask, render_template, request
-from flask_bootstrap import Bootstrap
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
 app = Flask(__name__)
-Bootstrap(app)
 
 @app.route("/",methods=["POST","GET"])
 def home():
@@ -25,8 +23,17 @@ def home():
     # gender = request.form["gender"]
     # bp = request.form["bp"]
     # chol = request.form["chol"]
+    varfever = 1
+    varcough = 1
+    varfatigue = 0
+    vardifBr = 1
+    varage = 20
+    vargender = 1
+    varbp = 3
+    varchol = 1
+    
 
-    diagnosis = model.predict([[1, 1, 0, 1, 20, 1, 3, 1]])
+    diagnosis = model.predict([[ varfever,varcough, varfatigue, vardifBr, varage, vargender, varbp, varchol]])
 
     return render_template("home.html", diagnosis=diagnosis)
 
